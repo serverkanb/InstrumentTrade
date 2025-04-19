@@ -1,0 +1,52 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Sipariş Güncelle</h3>
+<br />
+
+<form method="post">
+    <input type="hidden" asp-for="OrderId" />
+
+    <label>Adres</label>
+    <input type="text" asp-for="FullAddress" class="form-control" />
+    <br />
+
+    <label>Durum</label>
+    <select asp-for="Status" class="form-control">
+        <option value="Hazırlanıyor">Hazırlanıyor</option>
+        <option value="Kargoya Verildi">Kargoya Verildi</option>
+        <option value="Teslim Edildi">Teslim Edildi</option>
+    </select>
+    <br />
+
+    <label>Şehir</label>
+    <select asp-for="CityId" asp-items="ViewBag.Cities" class="form-control">
+        <option value="">-- Şehir Seçiniz --</option>
+    </select>
+    <br />
+
+    <label>Ülke</label>
+    <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-control">
+        <option value="">-- Ülke Seçiniz --</option>
+    </select>
+    <br />
+    <label>Kullanıcı</label>
+    <select asp-for="UserId" asp-items="ViewBag.Users" class="form-control">
+        <option value="">-- Kullanıcı Seçiniz --</option>
+    </select>
+    <br />
+
+    <label>Oluşturulma Tarihi</label>
+    <input type="text" asp-for="CreatedAt" class="form-control" readonly />
+    <br />
+
+    <label>Toplam Tutar</label>
+    <input type="text" asp-for="TotalPrice" class="form-control" readonly />
+    <br />
+
+    <button type="submit" class="btn btn-outline-primary">Güncelle</button>
+</form>
+

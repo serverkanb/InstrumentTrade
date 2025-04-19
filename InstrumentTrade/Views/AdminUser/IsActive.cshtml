@@ -1,0 +1,21 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "IsActive";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Kullanıcı Aktiflik Durumu</h3>
+
+<form asp-action="IsActive" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <label>Aktiflik Durumu</label>
+    <select class="form-control" asp-for="IsActive">
+        <option value="true">Aktif</option>
+        <option value="false">Pasif</option>
+    </select>
+    <br />
+
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+

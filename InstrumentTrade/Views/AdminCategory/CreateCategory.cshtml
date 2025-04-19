@@ -1,0 +1,16 @@
+﻿@using InstrumenShop.EntityLayer.Entities
+@model Category
+@{
+    ViewData["Title"] = "CreateCategory";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Kategori Ekleme sayfası</h3>
+
+<form method="post">
+    <label>Kategori Adı</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
+

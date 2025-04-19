@@ -1,0 +1,77 @@
+﻿@using InstrumentTrade.WebUI.Areas.Customer.Models
+@model CustomerEditViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+
+<div class="container mt-5 mb-5">
+    <h3 class="text-center font-weight-bold mb-4" style="font-size: 28px;">Profil Bilgileri Güncelleme Sayfası</h3>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>Ad</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Soyad</label>
+            <input asp-for="Surname" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Kullanıcı Adı</label>
+            <input asp-for="UserName" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Telefon No</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+         <div class="form-group">
+       @*  <label>Ülke</label>
+        @Html.DropDownListFor(m => m.CountryId, Model.Countries, "Ülke Seçiniz", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+        <label>Şehir</label>
+        @Html.DropDownListFor(m => m.CityId, Model.Cities, "Şehir Seçiniz", new { @class = "form-control" })
+        </div> *@
+        @* <div>
+            <label>Ülke</label>
+            <select asp-for="CountryId" asp-items="Model.Countries" class="form-control">
+                <option value="">-- Ülke Seçin --</option>
+            </select>
+        </div>
+        <div>
+            <label>Şehir</label>
+            <select asp-for="CityId" asp-items="Model.Cities" class="form-control">
+                <option value="">-- Şehir Seçin --</option>
+            </select>
+        </div> *@
+        <div class="form-group">
+            <label>Açık Adres</label>
+            <textarea asp-for="Address" rows="3" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Mevcut Şifreniz</label>
+            <input asp-for="OldPassword" type="password" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Yeni Şifreniz</label>
+            <input asp-for="NewPassword" type="password" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Yeni Şifre Tekrar</label>
+            <input asp-for="ConfirmPassword" type="password" class="form-control" />
+        </div>
+
+        <div class="text-danger">
+            @Html.ValidationSummary()
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block mt-3">Bilgileri Güncelle</button>
+    </form>
+</div>
+

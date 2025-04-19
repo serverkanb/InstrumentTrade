@@ -1,0 +1,68 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+
+<h3>Siparişler</h3>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Sipariş ID</th>
+            <th>Toplam Tutar</th>
+            <th>Durum</th>
+            <th>Oluşturulma Tarihi</th>
+            <th>Şehir</th>
+            <th>Ülke</th>
+            <th>Adres</th>
+            <th>Kullanıcı</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.OrderId</td>
+                <td>@item.TotalPrice ₺</td>
+                <td>@item.Status</td>
+                <td>@item.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@item.City?.Name</td>
+                <td>@item.Country?.Name</td>
+                <td>@item.FullAddress</td>
+                <td>@(item.AppUser?.Name + " " + item.AppUser?.Surname)</td>
+                <td>
+                    <a class="btn btn-sm btn-outline-info" asp-action="Detail" asp-route-id="@item.OrderId">Detay</a>
+                    <a class="btn btn-sm btn-outline-warning" asp-action="Update" asp-route-id="@item.OrderId">Güncelle</a>
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.OrderId" onclick="DeleteOrder">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+    function DeleteOrder(id) {
+        Swal.fire({
+            title: "Silmek istediğinize emin misiniz?",
+            text: "Bu işlemi geri alamazsınız!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Evet, Sil!",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Order/Delete/" + id;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,94 @@
+﻿@model RegisterViewModel
+@{
+	Layout = null;
+}
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>OneMusic Kayıt Formu</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="~/colorlib-regform-21/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="~/colorlib-regform-21/css/style.css">
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<div class="inner">
+
+			<!-- SOL: KAYIT FORMU -->
+			<form asp-action="SignUp" method="post">
+				<h3>Müzik Market Kayıt Formu</h3>
+
+				<div class="form-wrapper">
+					<label class="label-input">Ad</label>
+					<input type="text" asp-for="Name" class="form-control" required>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Soyad</label>
+					<input type="text" asp-for="Surname" class="form-control" required>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Email</label>
+					<input type="email" asp-for="Email" class="form-control" required>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Ülke</label>
+					<select asp-for="CountryId" class="form-control" asp-items="ViewBag.Countries">
+						<option value="">Ülke Seçiniz</option>
+					</select>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Şehir</label>
+					<select asp-for="CityId" class="form-control" asp-items="ViewBag.Cities">
+						<option value="">Şehir Seçiniz</option>
+					</select>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Adres</label>
+					<textarea asp-for="Address" class="form-control" rows="4" ></textarea>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Kullanıcı Adı</label>
+					<input type="text" asp-for="UserName" class="form-control" required>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Şifre</label>
+					<input type="password" asp-for="Password" class="form-control" required>
+				</div>
+
+				<div class="form-wrapper">
+					<label class="label-input">Şifre Tekrar</label>
+					<input type="password" asp-for="ConfirmPassword" class="form-control" required>
+				</div>
+
+				
+
+				<div style="color:red">
+					@Html.ValidationSummary()
+				</div>
+
+				<button type="submit">Kayıt Ol</button>
+			</form>
+
+			<!-- SAĞ: GÖRSEL -->
+			<div>
+				<img src="~/images/Gorsel.png" alt="Enstrüman Görseli" style="width:530px;height:624px; object-fit: cover;" />
+			</div>
+
+		</div>
+	</div>
+
+	<script src="~/colorlib-regform-21/js/jquery-3.3.1.min.js"></script>
+	<script src="~/colorlib-regform-21/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Ürün Ekleme Sayfası</h3>
+
+<br />
+
+<form method="post" asp-controller="AdminProduct" asp-action="Create">
+    <label>Ürün Adı</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+    <label>Description</label>
+    <input type="text" asp-for="Description" class="form-control" />
+    <br />
+    <label>Resim</label>
+    <input type="text" asp-for="ImageUrl" class="form-control" />
+    <br />
+    <label>Price</label>
+    <input type="number" asp-for="Price" class="form-control" />
+    <label>Stok</label>
+    <br />
+    <input type="number" asp-for="StockAmount" class="form-control" />
+    <br />
+
+
+    <label>Kategori</label>
+    <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control">
+        <option value="">-- Kategori Seçiniz --</option>
+    </select>
+    <br />
+
+    <button type="submit" class="btn btn-outline-primary">Kaydet</button>
+
+</form>

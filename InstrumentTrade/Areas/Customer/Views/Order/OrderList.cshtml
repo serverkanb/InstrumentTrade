@@ -1,0 +1,46 @@
+﻿@using InstrumentTrade.WebUI.Areas.Customer.Models
+@model List<OrderViewModel>
+
+@{
+    ViewData["Title"] = "OrderList";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<div class="container mt-5 mb-5">
+    <h2 class="text-center">Siparişlerim</h2>
+    <hr />
+    @if (Model.Any())
+    {
+        <table class="table table-bordered text-center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Sipariş No</th>
+                    <th>Tarih</th>
+                    <th>Toplam Tutar</th>
+                    <th>Durum</th>
+                    <th>Detay</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.CreatedAt.ToShortDateString()</td>
+                        <td>@order.TotalPrice ₺</td>
+                        <td>@order.Status</td>
+                        <td>
+                            <a asp-area="Customer" asp-controller="Order" asp-action="OrderDetail" asp-route-id="@order.OrderId" class="btn btn-info btn-sm">Detay</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            Henüz bir siparişiniz yok.
+        </div>
+    }
+</div>

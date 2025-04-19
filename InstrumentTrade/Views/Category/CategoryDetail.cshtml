@@ -1,0 +1,62 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Kategori: " + ViewBag.CategoryName;
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+@* 
+<h3 class="text-center font-weight-bold mb-4" style="font-size: 28px;">@ViewBag.CategoryName</h3> *@
+<div style="position: relative; height: 60px; margin-bottom: 40px;">
+    <h3 style="position: absolute; left: 0; right: 0; text-align: center; font-size: 28px; font-weight: bold;">
+        @ViewBag.CategoryName
+    </h3>
+</div>
+
+<!-- Arama ve Sıralama -->
+<form method="get" asp-action="CategoryDetail" asp-controller="Category">
+    <input type="hidden" name="id" value="@ViewBag.CategoryId" />
+    <div class="row mb-4 justify-content-center">
+        <div class="col-md-4">
+            <input type="text" name="search" class="form-control form-control-lg" placeholder="Ürün adına göre ara..." />
+        </div>
+        <div class="col-md-3">
+            <select name="sort" class="form-select form-control-lg">
+                <option value="">Sıralama Seç</option>
+                <option value="asc">Fiyat: Artan</option>
+                <option value="desc">Fiyat: Azalan</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary btn-lg w-100">Filtrele</button>
+        </div>
+    </div>
+</form>
+
+<!-- Ürünler -->
+<div class="row">
+    @foreach (var product in Model)
+    {
+        
+    
+    <div class="col-lg-4 col-sm-6 mb-4">
+        <div class="box_main" style="min-height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+            <h4 class="shirt_text" style="word-break: break-word;">@product.Name</h4>
+            <p class="price_text">Fiyat: <span style="color: #262626;">@product.Price ₺</span></p>
+            <div class="tshirt_img">
+                <img src="@product.ImageUrl" alt="@product.Name" style="max-height: 220px; object-fit: cover;" />
+            </div>
+            <div class="btn_main mt-2">
+                <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                    <input type="hidden" name="productId" value="@product.ProductId" />
+                    <div class="buy_bt">
+                        <button type="submit" style="background:none; border:none; padding:0; margin:0; color:#f26522; font-weight:600; cursor:pointer;">Sepete Ekle</button>
+                    </div>
+                </form>
+                    <div class="seemore_bt">
+                        <a asp-controller="ProductDetail" asp-action="ProductDetail" asp-route-id="@product.ProductId">Detay</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

@@ -1,0 +1,208 @@
+﻿@using InstrumentShop.BusinessLayer.Abstract
+@inject ICategoryService _categoryService
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- CSS Dosyaları -->
+    <link rel="stylesheet" href="~/eflyer-master/eflyer-master/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/eflyer-master/eflyer-master/css/style.css">
+    <link rel="stylesheet" href="~/eflyer-master/eflyer-master/css/responsive.css">
+    <link rel="stylesheet" href="~/eflyer-master/eflyer-master/css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="banner_bg_main">
+        <!-- Logo -->
+        <div class="logo_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="logo">
+                            <a asp-controller="Default" asp-action="Index">
+                                <img src="~/eflyer-master/eflyer-master/images/logo.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kategoriler (Sidebar) -->
+        <div class="header_section">
+            <div class="container">
+                <div class="containt_main">
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a asp-controller="Default" asp-action="Index">Anasayfa</a>
+
+                        @foreach (var category in _categoryService.TGetList())
+                        {
+                            <a asp-controller="Category" asp-action="CategoryDetail" asp-route-id="@category.Id">@category.Name</a>
+                        }
+                    </div>
+
+                    <span class="toggle_icon" onclick="openNav()">
+                        <img src="~/eflyer-master/eflyer-master/images/toggle-icon.png" />
+                    </span>
+
+                    <!-- Arama -->
+                    <div class="main">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Ürün ara...">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sepet & Profil -->
+                    <div class="header_box">
+                        <div class="login_menu">
+                            <ul>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a asp-controller="AdminOrder" asp-action="Index"><i class="fa fa-list-alt" aria-hidden="true"></i><span class="padding_10">Admin Paneli</span></a></li>
+                                        <li>
+                                            <form asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
+                                                <button type="submit" class="btn btn-link text-white" style="text-decoration:none; padding: 0;"><i class="fa fa-sign-out"></i>Çıkış Yap</button>
+                                            </form>
+                                        </li>
+                                    }
+                                    @if (User.IsInRole("Customer"))
+                                    {
+
+
+                                        <li>
+                                            <a asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                <span class="padding_10">Sepetim</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Customer" asp-controller="Order" asp-action="OrderList">
+                                                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                                                <span class="padding_10">Siparişlerim</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a asp-area="Customer" asp-controller="Profile" asp-action="Index">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                <span class="padding_10">Profil</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <form asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
+                                                <button type="submit" class="btn btn-link text-white" style="text-decoration:none; padding: 0;"><i class="fa fa-sign-out"></i>Çıkış Yap</button>
+                                            </form>
+                                        </li>
+                                        <li>
+                                            <span class="text-white" style="font-weight:bold;">@User.Identity.Name</span>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a asp-controller="Login" asp-action="Index">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <span class="padding_10">Giriş Yap</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Register" asp-action="Index">
+                                            <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                            <span class="padding_10">Kayıt Ol</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider -->
+        <div class="banner_section layout_padding">
+            <div class="container">
+                <div id="my_slider" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <h1 class="banner_taital">Favori Enstrümanların Burada</h1>
+                                    @* <div class="buynow_bt"><a asp-controller="Default" asp-action="Index">Alışverişe Başla</a></div> *@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="mt-8">
+        @RenderBody()
+    </main>
+    <!-- Footer -->
+    <div class="footer_section layout_padding">
+        <div class="container">
+            <div class="footer_logo">
+                <a asp-controller="Default" asp-action="Index">
+                    <img src="~/eflyer-master/eflyer-master/images/footer-logo.png" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="copyright_section">
+        <div class="container">
+            <p class="copyright_text">© 2020 Tüm Hakları Saklıdır | Design by <a href="https://html.design">Free HTML Templates</a></p>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="~/eflyer-master/eflyer-master/js/jquery.min.js"></script>
+    <script src="~/eflyer-master/eflyer-master/js/popper.min.js"></script>
+    <script src="~/eflyer-master/eflyer-master/js/bootstrap.bundle.min.js"></script>
+    <script src="~/eflyer-master/eflyer-master/js/jquery-3.0.0.min.js"></script>
+    <script src="~/eflyer-master/eflyer-master/js/plugin.js"></script>
+    <script src="~/eflyer-master/eflyer-master/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/eflyer-master/eflyer-master/js/custom.js"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>am hocam 

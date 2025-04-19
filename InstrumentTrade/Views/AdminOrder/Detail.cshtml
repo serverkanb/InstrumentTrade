@@ -1,0 +1,70 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Sipariş Detay</h3>
+<br />
+
+<table class="table table-bordered">
+    <tr>
+        <th>Sipariş ID</th>
+        <td>@Model.OrderId</td>
+    </tr>
+    <tr>
+        <th>Kullanıcı</th>
+        <td>@Model.AppUser?.Name @Model.AppUser?.Surname</td>
+    </tr>
+    <tr>
+        <th>Adres</th>
+        <td>@Model.FullAddress</td>
+    </tr>
+    <tr>
+        <th>Şehir</th>
+        <td>@Model.City?.Name</td>
+    </tr>
+    <tr>
+        <th>Ülke</th>
+        <td>@Model.Country?.Name</td>
+    </tr>
+    <tr>
+        <th>Durum</th>
+        <td>@Model.Status</td>
+    </tr>
+    <tr>
+        <th>Oluşturulma Tarihi</th>
+        <td>@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+    </tr>
+    <tr>
+        <th>Toplam Tutar</th>
+        <td>@Model.TotalPrice ₺</td>
+    </tr>
+</table>
+
+<h4>Sipariş Ürünleri</h4>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ürün Adı</th>
+            <th>Adet</th>
+            <th>Birim Fiyat</th>
+            <th>Ara Toplam</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.Product?.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price ₺</td>
+                <td>@(item.Quantity * item.Price) ₺</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,20 @@
+﻿@model List<ReviewViewModel>
+
+<h4>Yorumlar</h4>
+@if (Model.Any())
+{
+    <ul class="list-group mt-3">
+        @foreach (var review in Model)
+        {
+            <li class="list-group-item">
+                <strong>@review.Author</strong>: @review.Comment
+                <span class="text-warning ms-2">(@review.Rating / 5 ⭐)</span>
+                <span class="text-muted float-end">@review.Date.ToShortDateString()</span>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Henüz yorum yapılmamış.</p>
+}

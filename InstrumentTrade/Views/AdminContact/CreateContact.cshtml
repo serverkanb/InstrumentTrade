@@ -1,0 +1,22 @@
+﻿@model Contact
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Yeni İletişim Bilgisi Ekle</h3>
+
+<form method="post">
+    <label>Adres</label>
+    <textarea asp-for="AddressDescription" class="form-control"></textarea>
+    <br />
+    <label>Email</label>
+    <input asp-for="Email" class="form-control" />
+    <br />
+    <label>Telefon</label>
+    <input asp-for="Phone" class="form-control" />
+    <br />
+    <label>Harita Linki</label>
+    <input asp-for="MapUrl" class="form-control" />
+    <br />
+    <button class="btn btn-primary">Kaydet</button>
+</form>

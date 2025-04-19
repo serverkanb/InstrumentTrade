@@ -1,0 +1,59 @@
+﻿@model ProductDetailViewModel
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="@Model.ImageUrl" class="img-fluid rounded" alt="@Model.Name" />
+        </div>
+        <div class="col-md-7">
+            <h2>@Model.Name</h2>
+            <p class="text-muted">Fiyat: <strong>@Model.Price ₺</strong></p>
+            <p>
+                Durum:
+                @if (Model.InStock)
+                {
+                    <span class="text-success">Stokta var</span>
+                }
+                else
+                {
+                    <span class="text-danger">Stokta yok</span>
+                }
+            </p>
+            <p>@Model.Description</p>
+
+            @if (Model.InStock)
+            {
+                <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post">
+                    <input type="hidden" name="productId" value="@Model.ProductId" />
+                    <button type="submit" class="btn btn-warning">Sepete Ekle</button>
+                </form>
+            }
+
+        </div>
+        <div class="mt-3">
+            <h5>
+                
+                <span class="text-warning">@Math.Round((double)ViewBag.AverageRating, 1) / 5 ⭐</span>
+            </h5>
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    @await Component.InvokeAsync("ReviewList", new { productId = Model.ProductId })
+
+    @if(User.Identity.IsAuthenticated)
+    {
+        @await Component.InvokeAsync("ReviewForm",new {productId = Model.ProductId})
+    }
+    else
+    {
+        <div class="alert alert-warning">
+        Yorum yapabilmek için lütfen <a asp-controller="Login" asp-action="Index">giriş yapın</a>.
+    </div>
+    }
+   
+</div>

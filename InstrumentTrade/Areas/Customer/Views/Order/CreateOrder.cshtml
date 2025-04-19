@@ -1,0 +1,32 @@
+﻿@using InstrumentTrade.WebUI.Areas.Customer.Models
+@model OrderViewModel
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+<h1>ConfirmOrder</h1>
+
+<div class="container mt-5 mb-5">
+    <h2 class="text-center">Siparişi Tamamla</h2>
+    <hr />
+    <form asp-area="Customer" asp-controller="Order" asp-action="CreateOrder" method="post">
+        <div class="form-group">
+            <label>Ülke</label>
+            <select asp-for="CountryId" class="form-control" asp-items="ViewBag.Countries">
+                <option value="">Seçiniz</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Şehir</label>
+            <select asp-for="CityId" class="form-control" asp-items="ViewBag.Cities">
+                <option value="">Seçiniz</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Adres</label>
+            <textarea asp-for="FullAddress" class="form-control" rows="3" placeholder="Açık adresinizi yazınız"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Siparişi Onayla</button>
+    </form>
+</div>

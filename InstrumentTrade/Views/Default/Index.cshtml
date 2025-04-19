@@ -1,0 +1,120 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+@{
+    var gitarlar = Model.Where(x => x.Category.Name == "Gitarlar").ToList();
+    var piyanolar = Model.Where(x => x.Category.Name == "Piyanolar").ToList();
+    var yaylilar = Model.Where(x => x.Category.Name == "Yaylılar").ToList();
+}
+
+@if (gitarlar.Any())
+{
+    <div class="fashion_section">
+        <div class="container">
+            <h1 class="fashion_taital">Gitarlar</h1>
+            <div class="fashion_section_2">
+                <div class="row">
+                    @foreach (var product in gitarlar)
+                    {
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="box_main" style="min-height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 class="shirt_text" style="word-break: break-word;">@product.Name</h4>
+                                <p class="price_text">Fiyat: <span style="color: #262626;">@product.Price ₺</span></p>
+                                <div class="tshirt_img">
+                                    <img src="@product.ImageUrl" alt="@product.Name" style="max-height: 220px; object-fit: cover;" />
+                                </div>
+                                <div class="btn_main mt-2">
+                                    <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@product.ProductId" />
+                                        <div class="buy_bt">
+                                            <button type="submit" style="background:none; border:none; padding:0; margin:0; color:#f26522; font-weight:600; cursor:pointer;">Sepete Ekle</button>
+                                        </div>
+                                    </form>
+                                    <div class="seemore_bt">
+                                        <a asp-controller="ProductDetail" asp-action="ProductDetail" asp-route-id="@product.ProductId">Detay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (piyanolar.Any())
+{
+    <div class="fashion_section">
+        <div class="container">
+            <h1 class="fashion_taital">Piyanolar</h1>
+            <div class="fashion_section_2">
+                <div class="row">
+                    @foreach (var product in piyanolar)
+                    {
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="box_main" style="min-height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 class="shirt_text" style="word-break: break-word;">@product.Name</h4>
+                                <p class="price_text">Fiyat: <span style="color: #262626;">@product.Price ₺</span></p>
+                                <div class="tshirt_img">
+                                    <img src="@product.ImageUrl" alt="@product.Name" style="max-height: 220px; object-fit: cover;" />
+                                </div>
+                                <div class="btn_main mt-2">
+                                    <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@product.ProductId" />
+                                        <div class="buy_bt">
+                                            <button type="submit" style="background:none; border:none; padding:0; margin:0; color:#f26522; font-weight:600; cursor:pointer;">Sepete Ekle</button>
+                                        </div>
+                                    </form>
+                                    <div class="seemore_bt"><a href="#">Detay</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (yaylilar.Any())
+{
+    <div class="fashion_section">
+        <div class="container">
+            <h1 class="fashion_taital">Yaylılar</h1>
+            <div class="fashion_section_2">
+                <div class="row">
+                    @foreach (var product in yaylilar)
+                    {
+                        <div class="col-lg-4 col-sm-6 mb-4">
+                            <div class="box_main" style="min-height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+                                <h4 class="shirt_text" style="word-break: break-word;">@product.Name</h4>
+                                <p class="price_text">Fiyat: <span style="color: #262626;">@product.Price ₺</span></p>
+                                <div class="tshirt_img">
+                                    <img src="@product.ImageUrl" alt="@product.Name" style="max-height: 220px; object-fit: cover;" />
+                                </div>
+
+                                <div class="btn_main mt-2">
+                                    <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" style="display:inline;">
+                                        <input type="hidden" name="productId" value="@product.ProductId" />
+                                        <div class="buy_bt">
+                                            <button type="submit" style="background:none; border:none; padding:0; margin:0; color:#f26522; font-weight:600; cursor:pointer;">Sepete Ekle</button>
+                                        </div>
+                                    </form>
+
+
+                                    <div class="seemore_bt">
+                                        <a href="#">Detay</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@model List<City>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<h3>Şehirler</h3>
+
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>#</th>
+        <th>Şehir Adı</th>
+        <th>Ülke</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        count++;
+        <tr>
+            <td>@count</td>
+            <td>@item.Name</td>
+            <td>@(item.Country?.Name ?? "Ülke Yok")</td>
+            <td>
+                <a class="btn btn-outline-danger" asp-action="DeleteCity" asp-route-id="@item.CountryId">Sil</a>
+                <a class="btn btn-outline-info" asp-action="UpdateCity" asp-route-id="@item.CountryId">Güncelle</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a class="btn btn-outline-primary" asp-action="CreateCity">Yeni Şehir Ekle</a>
+

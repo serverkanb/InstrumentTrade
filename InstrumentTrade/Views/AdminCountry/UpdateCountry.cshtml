@@ -1,0 +1,15 @@
+﻿@model Country
+@{
+    ViewData["Title"] = "UpdateCountry";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Ülke Güncelle</h3>
+<br />
+<form method="post">
+    <input type="hidden" asp-for="CountryId" />
+    <label>Ülke Adı</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+    <button type="submit" class="btn btn-outline-primary">Güncelle</button>
+</form>

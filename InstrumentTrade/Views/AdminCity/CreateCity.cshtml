@@ -1,0 +1,16 @@
+﻿@model City
+@{
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<h3>Yeni Şehir Ekle</h3>
+
+<form method="post">
+    <label>Şehir Adı</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <br />
+    <label>Ülke Id</label>
+    <input type="number" asp-for="CountryId" class="form-control" />
+    <br />
+    <button class="btn btn-primary">Kaydet</button>
+</form>
