@@ -44,11 +44,11 @@
                 <div class="containt_main">
                     <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a asp-controller="Default" asp-action="Index">Anasayfa</a>
+                        <a asp-area="" asp-controller="Default" asp-action="Index">Anasayfa</a>
 
                         @foreach (var category in _categoryService.TGetList())
                         {
-                            <a asp-controller="Category" asp-action="CategoryDetail" asp-route-id="@category.Id">@category.Name</a>
+                            <a asp-area="" asp-controller="Category" asp-action="CategoryDetail" asp-route-id="@category.Id">@category.Name</a>
                         }
                     </div>
 
@@ -205,4 +205,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-</html>am hocam 
+</html>

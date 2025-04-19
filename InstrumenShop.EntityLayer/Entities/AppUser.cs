@@ -21,8 +21,8 @@ namespace InstrumenShop.EntityLayer.Entities
 
         public int? CityId { get; set; }         // ❗ Nullable
         public City City { get; set; }
- 
-        public bool IsActive { get; set; }
+
+        public bool IsActive { get; set; } = true;
 
         public List<Order> Orders { get; set; }
     }

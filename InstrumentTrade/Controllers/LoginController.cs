@@ -1,4 +1,5 @@
 ﻿using InstrumenShop.EntityLayer.Entities;
+using InstrumentShop.DataAccessLayer.Migrations;
 using InstrumentTrade.WebUI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -35,12 +36,12 @@ namespace InstrumentTrade.WebUI.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
 
+            var user = await _userManager.FindByNameAsync(model.UserName);
 
-
-            if (result.Succeeded)
+            if (result.Succeeded && user != null && user.IsActive)
             {
 
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+              
 
                 var customerResult = await _userManager.IsInRoleAsync(user, "Customer");
                 var adminResult = await _userManager.IsInRoleAsync(user, "Admin");
@@ -53,7 +54,7 @@ namespace InstrumentTrade.WebUI.Controllers
                     }
 
                     return RedirectToAction("Index", "Default");
-                    //return RedirectToAction("Index", "Default", new { area = "Customer" });
+               
                 }
                 else if (adminResult == true)
                 {
@@ -78,7 +79,9 @@ namespace InstrumentTrade.WebUI.Controllers
 
             }
 
-            ModelState.AddModelError("", "Kullanıcı adı veya şifre yanlış");
+            ModelState.AddModelError("", user != null && !user.IsActive
+        ? "Hesabınız pasif durumda. Lütfen yöneticiyle iletişime geçin."
+        : "Kullanıcı adı veya şifre yanlış");
             return View();
         }
 

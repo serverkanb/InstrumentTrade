@@ -5,38 +5,48 @@
     ViewData["Title"] = "Checkout";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
-
+<br />
+<br />
+<br />
+<br />
 
 <div class="container mt-5 mb-5">
-    <h2 class="text-center">Siparişi Tamamla</h2>
+    <h2 class="text-center">Siparişi Onayla</h2>
     <hr />
 
     <form asp-area="Customer" asp-controller="Order" asp-action="Checkout" method="post">
         <div class="row">
+            <!-- Sol Kısım: Adres Bilgileri -->
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Ad Soyad</label>
                     <input type="text" class="form-control" value="@Model.FullName" readonly />
                 </div>
+
                 <div class="form-group">
                     <label>Ülke</label>
                     @Html.DropDownListFor(m => m.CountryId, Model.Countries, "Ülke Seçiniz", new { @class = "form-control" })
                 </div>
+
                 <div class="form-group">
                     <label>Şehir</label>
                     @Html.DropDownListFor(m => m.CityId, Model.Cities, "Şehir Seçiniz", new { @class = "form-control" })
                 </div>
+
                 <div class="form-group">
                     <label>Açık Adres</label>
                     @Html.TextAreaFor(m => m.FullAddress, new { @class = "form-control", rows = "3" })
                 </div>
+
                 <div class="form-group">
                     <label>Sipariş Tutarı</label>
                     <input type="text" class="form-control" value="@Model.TotalPrice ₺" readonly />
                 </div>
+
                 <button type="submit" class="btn btn-success btn-lg btn-block">Siparişi Onayla</button>
             </div>
 
+            <!-- Sağ Kısım: Sepet Ürünleri -->
             <div class="col-md-6">
                 <h4>Sepetteki Ürünler</h4>
                 <table class="table table-sm table-striped">
@@ -46,23 +56,20 @@
                             <th>Resim</th>
                             <th>Adet</th>
                             <th>Fiyat</th>
-                          
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach (var item in Model.CartItems)
                         {
                             <tr>
                                 <td>@item.Product.Name</td>
                                 <td>
-                                    <img src="@item.Product.ImageUrl" alt="@item.Product.Name" style="max-width: 100px; max-height: 100px;" />
+                                    <img src="@item.Product.ImageUrl" alt="@item.Product.Name" style="max-width: 100px;" />
                                 </td>
                                 <td>@item.Quantity</td>
                                 <td>@(item.Product.Price * item.Quantity) ₺</td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
