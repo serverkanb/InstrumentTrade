@@ -19,7 +19,7 @@ namespace InstrumentTrade.WebUI.Areas.Customer.Models
         public string? NewPassword { get; set; }
         public string? ConfirmPassword { get; set; }
 
-        public List<SelectListItem> Countries { get; set; }
-        public List<SelectListItem> Cities { get; set; }
+        //public List<SelectListItem> Countries { get; set; }
+        //public List<SelectListItem> Cities { get; set; }
     }
 }

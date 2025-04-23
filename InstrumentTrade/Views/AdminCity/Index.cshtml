@@ -23,8 +23,8 @@
             <td>@item.Name</td>
             <td>@(item.Country?.Name ?? "Ülke Yok")</td>
             <td>
-                <a class="btn btn-outline-danger" asp-action="DeleteCity" asp-route-id="@item.CountryId">Sil</a>
-                <a class="btn btn-outline-info" asp-action="UpdateCity" asp-route-id="@item.CountryId">Güncelle</a>
+                <a class="btn btn-outline-danger" asp-action="DeleteCity" asp-route-id="@item.CityId">Sil</a>
+                <a class="btn btn-outline-info" asp-action="UpdateCity" asp-route-id="@item.CityId">Güncelle</a>
             </td>
         </tr>
     }

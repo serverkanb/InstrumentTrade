@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using static InstrumentTrade.WebUI.Areas.Customer.Models.ChangePaswordViewModel;
 
 namespace InstrumentTrade.WebUI.Areas.Customer.Controllers
 {
@@ -65,23 +66,23 @@ namespace InstrumentTrade.WebUI.Areas.Customer.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            // SelectList'leri her zaman yeniden doldur
-            model.Countries = _countryService.TGetList().Select(x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.CountryId.ToString()
-            }).ToList();
+            //  SelectList'leri doldur
+            //model.Countries = _countryService.TGetList()
+            //    .Select(x => new SelectListItem
+            //    {
+            //        Text = x.Name,
+            //        Value = x.CountryId.ToString()
+            //    }).ToList();
 
-            model.Cities = _cityService.TGetList().Select(x => new SelectListItem
-            {
-                Text = x.Name,
-                Value = x.CityId.ToString()
-            }).ToList();
+            //model.Cities = _cityService.TGetList()
+            //    .Select(x => new SelectListItem
+            //    {
+            //        Text = x.Name,
+            //        Value = x.CityId.ToString()
+            //    }).ToList();
 
             if (!ModelState.IsValid)
-            {
                 return View(model);
-            }
 
             user.Name = model.Name;
             user.Surname = model.Surname;
@@ -92,33 +93,49 @@ namespace InstrumentTrade.WebUI.Areas.Customer.Controllers
             //user.CountryId = model.CountryId;
             //user.CityId = model.CityId;
 
-            var result = await _userManager.CheckPasswordAsync(user, model.OldPassword);
-            if (result)
+            var updateResult = await _userManager.UpdateAsync(user);
+            if (updateResult.Succeeded)
             {
-                if (!string.IsNullOrEmpty(model.NewPassword) && model.NewPassword == model.ConfirmPassword)
-                {
-                    var changePasswordResult = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                    if (!changePasswordResult.Succeeded)
-                    {
-                        foreach (var item in changePasswordResult.Errors)
-                        {
-                            ModelState.AddModelError("", item.Description);
-                        }
-                        return View(model);
-                    }
-                }
-
-                var updateResult = await _userManager.UpdateAsync(user);
-                if (updateResult.Succeeded)
-                {
-                    return RedirectToAction("Index", "Login");
-                }
+                return RedirectToAction("Index", "Profile", new { area = "Customer" });
             }
 
-            ModelState.AddModelError("", "Mevcut Şifreniz Hatalı");
+            foreach (var item in updateResult.Errors)
+            {
+                ModelState.AddModelError("", item.Description);
+            }
+
+
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded)
+            {
+                ViewBag.Success = "Şifre başarıyla güncellendi.";
+                return View();
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(model);
+        }
 
 
     }

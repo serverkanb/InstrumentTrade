@@ -8,6 +8,7 @@ using InstrumentShop.DataAccessLayer.Repositories;
 using InstrumentTrade.WebUI.SeedData;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,6 +72,8 @@ builder.Services.AddScoped<IGenericDal<Country>, GenericRepository<Country>>();
 builder.Services.AddScoped<IGenericDal<Banner>, GenericRepository<Banner>>();
 builder.Services.AddScoped<IGenericDal<Cart>, GenericRepository<Cart>>();
 builder.Services.AddScoped<IGenericDal<Review>, GenericRepository<Review>>();
+
+
 
 // ---------------------------
 // 🧱 DB Context

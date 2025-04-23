@@ -14,7 +14,7 @@
     <h2 class="text-center">Siparişi Onayla</h2>
     <hr />
 
-    <form asp-area="Customer" asp-controller="Order" asp-action="Checkout" method="post">
+    <form id="checkoutForm" asp-area="Customer" asp-controller="Order" asp-action="Checkout" method="post">
         <div class="row">
             <!-- Sol Kısım: Adres Bilgileri -->
             <div class="col-md-6">
@@ -43,7 +43,7 @@
                     <input type="text" class="form-control" value="@Model.TotalPrice ₺" readonly />
                 </div>
 
-                <button type="submit" class="btn btn-success btn-lg btn-block">Siparişi Onayla</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block" onclick="return confirmOrder()">Siparişi Onayla</button>
             </div>
 
             <!-- Sağ Kısım: Sepet Ürünleri -->
@@ -76,3 +76,40 @@
         </div>
     </form>
 </div>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function confirmOrder() {
+            Swal.fire({
+                title: "Siparişinizi onaylıyor musunuz?",
+                // text: "Bu işlemin geri dönüşü yoktur.",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#28a745",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Evet, Onayla",
+                cancelButtonText: "Vazgeç"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('checkoutForm').submit(); // Formu gönder
+                }
+            });
+            return false; // Submit'i durdur
+        }
+
+        @if (ViewBag.ShowSuccessPopup != null && ViewBag.ShowSuccessPopup == true)
+        {
+            <text>
+                Swal.fire({
+                    title: 'Siparişiniz Alındı!',
+                    text: 'Teşekkür ederiz. Siparişiniz başarıyla oluşturuldu.',
+                    icon: 'success',
+                    confirmButtonText: 'Ana Sayfaya Dön'
+                }).then(() => {
+                    window.location.href = '/Default/Index';
+                });
+            </text>
+        }
+    </script>
+}

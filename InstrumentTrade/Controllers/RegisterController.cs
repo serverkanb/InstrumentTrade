@@ -57,7 +57,8 @@ namespace InstrumentTrade.WebUI.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Login");
+                await _userManager.AddToRoleAsync(user, "Customer");// kayıt olanı ilk olarak müşteri ata
+                return RedirectToAction("Index", "Login");//kayıt olanı logine gönder
             }
 
             foreach (var error in result.Errors)

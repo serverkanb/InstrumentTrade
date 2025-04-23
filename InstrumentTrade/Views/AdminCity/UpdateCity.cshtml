@@ -6,12 +6,14 @@
 <h3>Şehir Güncelle</h3>
 
 <form method="post">
-    <input type="hidden" asp-for="CountryId" />
+    <input type="hidden" asp-for="CityId" />
     <label>Şehir Adı</label>
     <input type="text" asp-for="Name" class="form-control" />
     <br />
-    <label>Ülke Id</label>
-    <input type="number" asp-for="CountryId" class="form-control" />
+    <label>Ülke Seçiniz</label>
+    <select asp-for="CountryId" class="form-control" asp-items="ViewBag.Countries">
+        <option value="">-- Ülke Seçin --</option>
+    </select>
     <br />
     <button class="btn btn-outline-primary">Güncelle</button>
 </form>

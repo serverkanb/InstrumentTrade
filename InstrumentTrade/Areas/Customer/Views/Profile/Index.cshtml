@@ -4,12 +4,23 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/Index.cshtml";
 }
+<br />
+<br />
+<br />
+<br />
+<br />
 
 
 <div class="container mt-5 mb-5">
     <h3 class="text-center font-weight-bold mb-4" style="font-size: 28px;">Profil Bilgileri Güncelleme Sayfası</h3>
 
     <form method="post" enctype="multipart/form-data">
+        <div>
+            <a asp-area="Customer" asp-controller="Profile" asp-action="ChangePassword">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <span class="padding_10">Şifre Değiştir</span>
+            </a>
+        </div>
         <div class="form-group">
             <label>Ad</label>
             <input asp-for="Name" class="form-control" />
@@ -30,15 +41,8 @@
             <label>Telefon No</label>
             <input asp-for="PhoneNumber" class="form-control" />
         </div>
-         <div class="form-group">
-       @*  <label>Ülke</label>
-        @Html.DropDownListFor(m => m.CountryId, Model.Countries, "Ülke Seçiniz", new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-        <label>Şehir</label>
-        @Html.DropDownListFor(m => m.CityId, Model.Cities, "Şehir Seçiniz", new { @class = "form-control" })
-        </div> *@
-        @* <div>
+
+       @*  <div>
             <label>Ülke</label>
             <select asp-for="CountryId" asp-items="Model.Countries" class="form-control">
                 <option value="">-- Ülke Seçin --</option>
@@ -54,19 +58,7 @@
             <label>Açık Adres</label>
             <textarea asp-for="Address" rows="3" class="form-control"></textarea>
         </div>
-        <div class="form-group">
-            <label>Mevcut Şifreniz</label>
-            <input asp-for="OldPassword" type="password" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Yeni Şifreniz</label>
-            <input asp-for="NewPassword" type="password" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Yeni Şifre Tekrar</label>
-            <input asp-for="ConfirmPassword" type="password" class="form-control" />
-        </div>
-
+     
         <div class="text-danger">
             @Html.ValidationSummary()
         </div>

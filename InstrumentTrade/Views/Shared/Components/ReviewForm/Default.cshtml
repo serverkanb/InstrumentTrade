@@ -1,22 +1,31 @@
 ﻿@model ReviewInputModel
 
-<form asp-controller="Review" asp-action="AddComment" method="post" class="mt-4">
-    <input type="hidden" asp-for="ProductId" />
-    <div class="form-group mt-2">
-        <label>Puanınız</label>
-        <select asp-for="Rating" class="form-control" required>
-            <option value="">-- Puan Seçin --</option>
-            <option value="1">1 - Kötü</option>
-            <option value="2">2</option>
-            <option value="3">3 - Orta</option>
-            <option value="4">4</option>
-            <option value="5">5 - Mükemmel</option>
-        </select>
+@if (ViewBag.CanReview != null && (bool)ViewBag.CanReview)
+{
+    <form asp-controller="Review" asp-action="AddComment" method="post" class="mt-4">
+        <input type="hidden" asp-for="ProductId" />
+        <div class="form-group mt-2">
+            <label>Puanınız</label>
+            <select asp-for="Rating" class="form-control" required>
+                <option value="">-- Puan Seçin --</option>
+                <option value="1">1 - Kötü</option>
+                <option value="2">2</option>
+                <option value="3">3 - Orta</option>
+                <option value="4">4</option>
+                <option value="5">5 - Mükemmel</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Yorumunuz</label>
+            <textarea asp-for="Comment" class="form-control" required></textarea>
+        </div>
+
+        <button class="btn btn-primary mt-2">Yorum Yap</button>
+    </form>
+}
+else
+{
+    <div class="alert alert-warning mt-3">
+        Bu ürüne yorum yapabilmek için önce satın almanız gerekmektedir.
     </div>
-    <div class="form-group">
-        <label>Yorumunuz</label>
-        <textarea asp-for="Comment" class="form-control" required></textarea>
-    </div>
-    
-    <button class="btn btn-primary mt-2">Yorum Yap</button>
-</form>
+}

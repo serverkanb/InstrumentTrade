@@ -46,12 +46,7 @@ namespace InstrumentTrade.WebUI.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    var categories = _categoryService.TGetList();
-            //    ViewBag.Categories = new SelectList(categories, "Id", "Name");
-            //    return View(product);
-            //}
+            //
 
             _productService.TCreate(product);
             return RedirectToAction("Index");

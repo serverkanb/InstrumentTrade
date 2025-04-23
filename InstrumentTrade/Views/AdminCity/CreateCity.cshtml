@@ -9,8 +9,10 @@
     <label>Şehir Adı</label>
     <input type="text" asp-for="Name" class="form-control" />
     <br />
-    <label>Ülke Id</label>
-    <input type="number" asp-for="CountryId" class="form-control" />
+    <label>Ülke Seçiniz</label>
+    <select asp-for="CountryId" class="form-control" asp-items="ViewBag.Countries">
+        <option value="">-- Ülke Seçin --</option>
+    </select>
     <br />
     <button class="btn btn-primary">Kaydet</button>
 </form>

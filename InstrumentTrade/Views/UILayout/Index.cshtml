@@ -58,15 +58,16 @@
 
                     <!-- Arama -->
                     <div class="main">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Ürün ara...">
+                        <form asp-area="" asp-controller="AllProduct" asp-action="Index" method="get" class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Ürün ara..." />
                             <div class="input-group-append">
-                                <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
+                                <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color:#f26522;">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
-                        </div>
+                        </form>
                     </div>
+
 
                     <!-- Sepet & Profil -->
                     <div class="header_box">
@@ -78,7 +79,7 @@
                                     {
                                         <li><a asp-controller="AdminOrder" asp-action="Index"><i class="fa fa-list-alt" aria-hidden="true"></i><span class="padding_10">Admin Paneli</span></a></li>
                                         <li>
-                                            <form asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
+                                            <form asp-area="" asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
                                                 <button type="submit" class="btn btn-link text-white" style="text-decoration:none; padding: 0;"><i class="fa fa-sign-out"></i>Çıkış Yap</button>
                                             </form>
                                         </li>
@@ -106,7 +107,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <form asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
+                                            <form asp-area="" asp-controller="Login" asp-action="Logout" method="post" style="display:inline;">
                                                 <button type="submit" class="btn btn-link text-white" style="text-decoration:none; padding: 0;"><i class="fa fa-sign-out"></i>Çıkış Yap</button>
                                             </form>
                                         </li>
@@ -118,13 +119,13 @@
                                 else
                                 {
                                     <li>
-                                        <a asp-controller="Login" asp-action="Index">
+                                        <a asp-area="" asp-controller="Login" asp-action="Index">
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="padding_10">Giriş Yap</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a asp-controller="Register" asp-action="Index">
+                                        <a asp-area="" asp-controller="Register" asp-action="SignUp">
                                             <i class="fa fa-user-plus" aria-hidden="true"></i>
                                             <span class="padding_10">Kayıt Ol</span>
                                         </a>
@@ -143,16 +144,33 @@
             <div class="container">
                 <div id="my_slider" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
+
                         <div class="carousel-item active">
                             <div class="row">
                                 <div class="col-sm-12">
-
                                     <h1 class="banner_taital">Favori Enstrümanların Burada</h1>
-                                    @* <div class="buynow_bt"><a asp-controller="Default" asp-action="Index">Alışverişe Başla</a></div> *@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1 class="banner_taital">Her Tarza Uygun Müzik Aletleri</h1>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h1 class="banner_taital">Ruhuna Hitap Eden Tınılar</h1>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                     <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
                         <i class="fa fa-angle-left"></i>
                     </a>
@@ -162,6 +180,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <main class="mt-8">
         @RenderBody()

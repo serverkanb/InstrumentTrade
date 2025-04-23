@@ -57,7 +57,7 @@ namespace InstrumentTrade.WebUI.Areas.Customer.Controllers
                     Text = c.Name
                 }).ToList()
             };
-
+         
             return View(viewModel);
         }
         [HttpPost]

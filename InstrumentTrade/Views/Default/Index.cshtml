@@ -5,9 +5,9 @@
 }
 
 @{
-    var gitarlar = Model.Where(x => x.Category.Name == "Gitarlar").ToList();
-    var piyanolar = Model.Where(x => x.Category.Name == "Piyanolar").ToList();
-    var yaylilar = Model.Where(x => x.Category.Name == "Yaylılar").ToList();
+    var gitarlar = Model.Where(x => x.Category.Name == "Gitarlar").Take(3).ToList();
+    var piyanolar = Model.Where(x => x.Category.Name == "Piyanolar").Take(3).ToList();
+    var yaylilar = Model.Where(x => x.Category.Name == "Yaylılar").Take(3).ToList();
 }
 
 @if (gitarlar.Any())

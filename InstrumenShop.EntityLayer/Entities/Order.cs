@@ -14,7 +14,7 @@ namespace InstrumenShop.EntityLayer.Entities
 
         public decimal TotalPrice { get; set; }
         public string Status { get; set; } // Hazırlanıyor, Kargoda, Teslim Edildi gibi
-        public DateTime CreatedAt { get; set; } = DateTime.Now;//Siparişin oluşturuğu tarihi otomatik alır
+        public DateTime CreatedAt { get; set; } = DateTime.Now;//Siparişin oluşturuğu tarihi otomatik alsın diye
 
         public string FullAddress { get; set; }
         public int? CountryId { get; set; }
